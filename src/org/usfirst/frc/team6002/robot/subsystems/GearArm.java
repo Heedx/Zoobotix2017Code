@@ -1,6 +1,8 @@
 package org.usfirst.frc.team6002.robot.subsystems;
 
 import org.usfirst.frc.team6002.robot.RobotMap;
+import org.usfirst.frc.team6002.robot.commands.GearArmRest;
+import org.usfirst.frc.team6002.robot.commands.SetGearArmPosition;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
@@ -17,15 +19,14 @@ public class GearArm extends Subsystem {
     // here. Call these from Commands
 	private static CANTalon gearArmMotor; 
 	
-	int absPos; 
+	//int absPos; 
 	
 	private static double p; 
 	private static double i; 
 	private static double d;
 	
 	private static double home;
-	private static double give; 
-	private static double accept; 
+	private static double intake;
 	
 	public GearArm(){
 		//lets grab the 360 degree position of the MagEncoder's absolute position
@@ -34,11 +35,14 @@ public class GearArm extends Subsystem {
 		d = 0.0;
 		
 		gearArmMotor = new CANTalon(RobotMap.gearArmMotorPort);
-		absPos = gearArmMotor.getPulseWidthPosition() & 0xFFF; 
+		//absPos = gearArmMotor.getPulseWidthPosition() & 0xFFF; 
 		
-		gearArmMotor.setEncPosition(absPos); 
+		//gearArmMotor.setEncPosition(absPos);
+		gearArmMotor.setEncPosition(0);
 		gearArmMotor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative); 
 		
+		home = 0;
+		intake = .25;
 		
 		//Configuring the PID and Talon settings 
 		gearArmMotor.setSafetyEnabled(false); //Turn off safety features
@@ -53,19 +57,23 @@ public class GearArm extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new GearArmRest());
     }
+    
     public double getHomePosition(){
     	return home; 
     }
-    public double getGivePosition(){
-    	return give; 
+    
+    public double getIntakePosition(){
+    	return intake;
     }
-    public double getAcceptPosition(){
-    	return accept; 
-    }
-    public void SetGearArmAngle(double angle){
+    
+    public void setGearArmAngle(double angle){
     	gearArmMotor.set(angle); 
+    }
+    
+    public double getGearPosition(){
+    	return gearArmMotor.getPosition();
     }
 }
 

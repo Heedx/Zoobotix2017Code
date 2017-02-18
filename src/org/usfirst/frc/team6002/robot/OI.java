@@ -1,5 +1,7 @@
 package org.usfirst.frc.team6002.robot;
 
+import org.usfirst.frc.team6002.robot.commands.*;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -17,16 +19,21 @@ public class OI {
 	// number it is.
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
-	  public static Joystick controller;
+	  private Joystick controller;
 	  
 	  //Values that FRC gave to reference these axis
 	  private int leftYAxis = 1;
 	  private int rightYAxis = 5;
 	  private int rightXAxis = 4;
-	  Button aButton = new JoystickButton(controller, 1);
-  
+	  private Button aButton;
+	  
 	public OI() {
 		controller = new Joystick(0);
+		aButton = new JoystickButton(controller, 1);
+		
+		aButton.whenPressed(new SetGearArmPosition(Robot.gearArm.getIntakePosition()));
+
+		//aButton.toggleWhenPressed(new SetGearArmPosition(.25));
 	}
 	
 	//gets the values of the controller joysticks
