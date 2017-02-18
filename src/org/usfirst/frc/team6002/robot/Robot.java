@@ -20,7 +20,8 @@ import org.usfirst.frc.team6002.robot.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	public static OI oi;
-
+	public static Drivetrain chassis; 
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		chassis = new Drivetrain(); 
 		
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

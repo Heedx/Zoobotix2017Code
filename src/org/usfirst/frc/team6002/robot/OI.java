@@ -17,21 +17,29 @@ public class OI {
 	// number it is.
 	// Joystick stick = new Joystick(port);
 	// Button button = new JoystickButton(stick, buttonNumber);
-	  public static Joystick mXbox;
-	  Button aButton = new JoystickButton(mXbox, 1);
-	    OI() {
-	    mXbox = new Joystick(0);
-	    }
-	    
-	    // DRIVER CONTROLS
-	    public double getLeftY() {
-	        return -mXbox.getRawAxis(1);
-	    }
-
-	    public double getRigh9tY() {
-	        return mXbox.getRawAxis(5);
-	    }
-	    
+	  public static Joystick controller;
+	  
+	  //Values that FRC gave to reference these axis
+	  private int leftYAxis = 1;
+	  private int rightYAxis = 5;
+	  private int rightXAxis = 4;
+	  Button aButton = new JoystickButton(controller, 1);
+  
+	public OI() {
+		controller = new Joystick(0);
+	}
+	
+	//gets the values of the controller joysticks
+	public double getLeftY() {
+	    return -controller.getRawAxis(leftYAxis); //Left Joystick y-axis
+	}
+	
+	public double getRightY() {
+	    return controller.getRawAxis(rightYAxis); //Right Joystick y-axis 
+	}
+	public double getRightX(){
+		return controller.getRawAxis(rightXAxis);
+	}
 	    
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
