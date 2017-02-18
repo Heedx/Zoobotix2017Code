@@ -22,4 +22,6 @@ public class RobotMap {
 	public static int backleftMotorPort = 1;
 	public static int frontRightMotorPort = 2;
 	public static int backRightMotorPort = 3;
+	//Using CAN Motor
+	public static int gearArmMotorPort = 1;
 }
