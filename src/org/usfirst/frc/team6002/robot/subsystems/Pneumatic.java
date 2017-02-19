@@ -15,13 +15,14 @@ public class Pneumatic extends Subsystem {
 	private DoubleSolenoid gearShift;
 	private boolean highGear;
 	
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	Compressor airC = new Compressor(0); //fix the port number
-    	gearShift = new DoubleSolenoid(1,2);
     }
     public void gearShift(DoubleSolenoid gearShift){
+    	Compressor airC = new Compressor(0); //fix the port number
+    	gearShift = new DoubleSolenoid(1,2);
     	this.gearShift = gearShift;
     }
     public void compressorOn(){
